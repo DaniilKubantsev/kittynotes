@@ -5,15 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.example.kittynotes.dto.AuthRequest
-import com.example.kittynotes.retrofit.Api
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
+
+import com.example.kittynotes.retrofit.ApiService
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("ResourceType")
@@ -21,24 +14,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val regButton: Button = findViewById(R.id.registration_button)
-        val signInButton: Button = findViewById(R.id.sign_in_button)
-        val authRequest = AuthRequest(getText(R.id.username_form).toString(), getText(R.id.username_form).toString())
+        val restApi = ApiService()
 
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        val regButton = findViewById<Button>(R.id.registration_button)
+        val signInButton = findViewById<Button>(R.id.sign_in_button)
 
-        val clien = OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .build()
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://kaplaan.ru/backend/app/")
-            .client(clien)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
 
-        val api = retrofit.create(Api::class.java)
 
 
 
@@ -46,10 +28,14 @@ class MainActivity : AppCompatActivity() {
             setContentView(R.layout.activity_registration)
         }
 
+
         signInButton.setOnClickListener{
-            CoroutineScope(Dispatchers.IO).launch {
-                val jwt = api.auth(authRequest)
-            }
+            var login = getString(R.id.username_form).toString()
+            var password = getString(R.id.password_form).toString()
+
+            val authRequest = AuthRequest(login, password)
+
+            restApi.authorisation(authRequest)
         }
     }
 }
