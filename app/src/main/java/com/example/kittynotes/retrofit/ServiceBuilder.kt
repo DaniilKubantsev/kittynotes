@@ -10,13 +10,13 @@ class ServiceBuilder {
 
     private val interceptor = HttpLoggingInterceptor()
 
-    private val clien = OkHttpClient.Builder()
+    private val client = OkHttpClient.Builder()
         .addInterceptor(interceptor)
         .build()
 
     private val retrofit = Retrofit.Builder()
         .baseUrl("https://kaplaan.ru/backend/app/")
-        .client(clien)
+        .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

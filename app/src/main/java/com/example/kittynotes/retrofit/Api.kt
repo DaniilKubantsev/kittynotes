@@ -6,8 +6,8 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface Api {
-    @POST("api/v1/auth")
-    suspend fun auth(@Body authRequest: AuthRequest): JwtResponse
+    @POST("api/v1/auth/login")
+    suspend fun login(@Body authRequest: AuthRequest): JwtResponse
 
 
     @POST("api/v1/auth/registration")

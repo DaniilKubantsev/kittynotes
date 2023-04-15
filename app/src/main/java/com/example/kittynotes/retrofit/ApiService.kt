@@ -9,7 +9,7 @@ object ApiService {
     val api = ServiceBuilder().getApi()
 
     suspend fun authorisation(authRequest: AuthRequest): JwtResponse? {
-        return api.auth(authRequest)
+        return api.login(authRequest)
     }
 
     suspend fun registration(registrationRequest: AuthRequest){
