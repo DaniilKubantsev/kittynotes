@@ -88,7 +88,7 @@ class RegistrationFragment : Fragment() {
                     }
                     if (errorCode == 401) {
                         launch(Dispatchers.Main) {
-                            Toast.makeText(activity, "UNAUTHORIZED", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(activity, "Пользователь уже зарегистрирован", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }

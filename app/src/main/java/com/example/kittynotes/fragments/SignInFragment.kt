@@ -16,6 +16,7 @@ import com.example.kittynotes.utils.Validator
 import kotlinx.coroutines.*
 import retrofit2.HttpException
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class SignInFragment : Fragment() {
 
     private lateinit var view: View
@@ -27,7 +28,7 @@ class SignInFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         view = inflater.inflate(R.layout.fragment_sign_in, container, false)
 
@@ -47,6 +48,7 @@ class SignInFragment : Fragment() {
         val login = loginEditText.text.toString()
         val password = passwordEditText.text.toString()
         val authRequestBody: AuthRequest
+        var result: JwtResponse? = null
 
         if (Validator.isValidEmail(login)) {
             authRequestBody = AuthRequest(
@@ -63,32 +65,33 @@ class SignInFragment : Fragment() {
         }
 
 
-        var authResult = CoroutineScope(Dispatchers.Default).async {
+        val authResult = CoroutineScope(Dispatchers.Default).async {
             try {
-                ApiService.authorisation(authRequestBody)
+                val result = ApiService.authorisation(authRequestBody)
 
-//                launch(Dispatchers.Main) {
-//                    Toast.makeText(activity, "OK", Toast.LENGTH_SHORT).show()
-//                }
+                launch(Dispatchers.Main) {
+                    Toast.makeText(activity, "OK", Toast.LENGTH_SHORT).show()
+                }
+                result
             } catch (e: HttpException) {
                 if (e.code() == 400) {
+                        launch(Dispatchers.Main) {
+                        Toast.makeText(
+                            activity,
+                           "BAD REQUEST",
+                            Toast.LENGTH_SHORT
+                      ).show()
+                       }
                     null
-//                    launch(Dispatchers.Main) {
-//                        Toast.makeText(
-//                            activity,
-//                            "BAD REQUEST",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    }
                 } else if(e.code() == 401){
+                    launch(Dispatchers.Main) {
+                        Toast.makeText(
+                            activity,
+                            "UNAUTHORIZED",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                     null
-//                    launch(Dispatchers.Main) {
-//                        Toast.makeText(
-//                            activity,
-//                            "UNAUTHORIZED",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    }
                 }
                 else{
                     null
@@ -98,11 +101,12 @@ class SignInFragment : Fragment() {
         }
         authResult.invokeOnCompletion {
             if(it == null){
-                authResult.getCompleted()
+                result = authResult.getCompleted()
             }
         }
 
-        return JwtResponse(null, null)
+        return result
+
     }
 
 }
