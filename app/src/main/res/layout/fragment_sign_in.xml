@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/sing_in_fragment">
+
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingHorizontal="50px"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            android:letterSpacing="0.1"
+            android:text="KITTY\nNOTES"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="50dp"
+            android:textStyle="bold" />
+
+
+        <EditText
+            android:id="@+id/login_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Username/Email"/>
+
+        <EditText
+            android:id="@+id/password_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Password"/>
+
+
+        <Button
+            android:id="@+id/sign_in_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:background="#000000"
+            android:onClick="onSignInClick"
+            android:text="sing in" />
+
+
+    </LinearLayout>
+
+</FrameLayout>
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="horizontal"-->
+    <!--            android:gravity="center_vertical">-->
+
+    <!--&lt;!&ndash;            <Button&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:id="@+id/registration_button"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_weight="50"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_marginRight="5dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:text="log in"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:textColor="@color/black"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:background="?android:attr/selectableItemBackground"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:textSize="10dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:onClick="onRegistrationClick"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;            <Button&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:id="@+id/forgot_button"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_weight="50"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_marginLeft="5dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:text="forgot password?"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:textColor="@color/black"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:background="?android:attr/selectableItemBackground"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:textSize="10dp"/>&ndash;&gt;-->
+
+    <!--        </LinearLayout>-->
